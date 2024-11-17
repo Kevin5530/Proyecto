@@ -1,0 +1,92 @@
+/* Estilo base del cuerpo */
+body {
+  font-family: Arial, sans-serif;
+  background-color: #f9f9f9;
+  margin: 0;
+  padding: 0;
+}
+
+/* Encabezados */
+h2 {
+  text-align: center;
+  color: #333;
+  margin-bottom: 20px;
+}
+
+/* Estilo del formulario */
+form.form-producto {
+  margin: 20px auto; /* Centrar el formulario */
+  max-width: 500px; /* Ancho máximo */
+  background: #fff;
+  padding: 20px;
+  border-radius: 5px;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+}
+
+form.form-producto label {
+  display: block;
+  margin-bottom: 8px;
+  font-weight: bold;
+}
+
+form.form-producto input {
+  width: 100%;
+  padding: 10px;
+  margin-bottom: 15px;
+  border: 1px solid #ddd;
+  border-radius: 5px;
+}
+
+form.form-producto button {
+  width: 100%;
+  background-color: #28a745;
+  color: white;
+  border: none;
+  padding: 10px;
+  text-transform: uppercase;
+  cursor: pointer;
+  border-radius: 5px;
+}
+
+form.form-producto button:hover {
+  background-color: #218838;
+}
+
+/* Estilo de la tabla */
+#tabla-productos {
+  width: 90%; /* Reducido un poco para no ocupar todo el ancho */
+  margin: 20px auto; /* Centrar la tabla */
+  border-collapse: collapse;
+  background: #fff;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+}
+
+#tabla-productos th,
+#tabla-productos td {
+  padding: 10px;
+  text-align: left;
+  border: 1px solid #ddd;
+}
+
+#tabla-productos th {
+  background-color: #f2f2f2;
+  text-transform: uppercase;
+}
+
+#tabla-productos tr:nth-child(even) {
+  background-color: #f9f9f9;
+}
+
+#tabla-productos tr:hover {
+  background-color: #f1f1f1;
+}
+
+/* Estilo de los enlaces */
+a {
+  text-decoration: none;
+  color: #007bff;
+}
+
+a:hover {
+  text-decoration: underline;
+}
