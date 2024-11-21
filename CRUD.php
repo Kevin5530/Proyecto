@@ -2,10 +2,10 @@
 class CRUD
 {
     // 1. Agregar un nuevo cliente
-    public function agregarCliente($conn, $nombre_cliente, $telefono = null)
+    public function agregarCliente($conn, $nombre_cliente, $telefono = null, $num_personas)
     {
-        $stmt = $conn->prepare("INSERT INTO clientes (nombre_cliente, telefono) VALUES (?, ?)");
-        $stmt->bind_param("ss", $nombre_cliente, $telefono);
+        $stmt = $conn->prepare("INSERT INTO clientes (nombre_cliente, telefono, num_personas) VALUES (?, ?, ?)");
+        $stmt->bind_param("ssi", $nombre_cliente, $telefono, $num_personas);
         return $stmt->execute();
     }
 
@@ -17,10 +17,10 @@ class CRUD
     }
 
     // 3. Actualizar información de un cliente (nombre o teléfono en este caso)
-    public function actualizarCliente($conn, $id_cliente, $nuevo_nombre_cliente, $nuevo_telefono)
+    public function actualizarCliente($conn, $id_cliente, $nuevo_nombre_cliente, $nuevo_telefono, $num_personas)
     {
-        $stmt = $conn->prepare("UPDATE clientes SET nombre_cliente = ?, telefono = ? WHERE id_cliente = ?");
-        $stmt->bind_param("ssi", $nuevo_nombre_cliente, $nuevo_telefono, $id_cliente);
+        $stmt = $conn->prepare("UPDATE clientes SET nombre_cliente = ?, telefono = ?, num_personas = ? WHERE id_cliente = ?");
+        $stmt->bind_param("ssii", $nuevo_nombre_cliente, $nuevo_telefono, $num_personas,  $id_cliente);
         return $stmt->execute();
     }
 
@@ -40,6 +40,72 @@ class CRUD
         $stmt->bind_param("i", $id_cliente);
         return $stmt->execute();
     }
+
+
+    // 1. Crear mesa
+    public function agregarMesa($conn, $numero_mesa, $capacidad, $estado)
+    {
+        $stmt = $conn->prepare("INSERT INTO control_mesas (numero_mesa, capacidad, estado) VALUES (?, ?, ?)");
+        $stmt->bind_param("iis", $numero_mesa, $capacidad, $estado);
+        return $stmt->execute();
+    }
+
+    // 2. Ver todas las mesas
+    public function consultarMesas($conn)
+    {
+        $sql = "SELECT * FROM control_mesas";
+        $result = $conn->query($sql);
+        return $result->fetch_all(MYSQLI_ASSOC);
+    }
+
+    public function obtenerMesaPorId($conn, $id_mesa)
+    {
+        $stmt = $conn->prepare("SELECT * FROM control_mesas WHERE id_mesa = ?");
+        $stmt->bind_param("i", $id_mesa);
+        $stmt->execute();
+        return $stmt->get_result()->fetch_assoc();
+    }
+
+    // 3. Actualizar información de una mesa
+    public function actualizarMesa($conn, $id_mesa, $nuevo_numero_mesa, $nuevo_capacidad)
+    {
+        $stmt = $conn->prepare("UPDATE control_mesas SET numero_mesa = ?, capacidad = ? WHERE id_mesa = ?");
+        $stmt->bind_param("ssi", $nuevo_numero_mesa, $nuevo_capacidad, $id_mesa);
+        return $stmt->execute();
+    }
+
+    // 4. Eliminar una mesa
+    public function eliminarMesa($conn, $id_mesa)
+    {
+        $stmt = $conn->prepare("DELETE FROM control_mesas WHERE id_mesa = ?");
+        $stmt->bind_param("i", $id_mesa);
+        return $stmt->execute();
+    }
+
+    public function buscarMesaDisponible($conn, $capacidad)
+    {
+        $stmt = $conn->prepare("SELECT * FROM control_mesas WHERE capacidad >= ? AND estado = 'disponible' LIMIT 1");
+        $stmt->bind_param("i", $capacidad);
+        $stmt->execute();
+        return $stmt->get_result()->fetch_assoc();
+    }
+
+    public function asignarMesa($conn, $id_mesa, $id_cliente)
+    {
+        $conn->begin_transaction();
+
+        $stmt = $conn->prepare("UPDATE control_mesas SET estado = 'ocupada' WHERE id_mesa = ?");
+        $stmt->bind_param("i", $id_mesa);
+        $stmt->execute();
+
+        $stmt = $conn->prepare("INSERT INTO pedidos (id_cliente, id_mesa, fecha_hora) VALUES (?, ?, NOW())");
+        $stmt->bind_param("ii", $id_cliente, $id_mesa);
+        $stmt->execute();
+
+        $conn->commit();
+        return true;
+    }
+
 
     // 5. Agregar un nuevo producto
     public function agregarProducto($conn, $nombre_producto, $precio)

@@ -32,12 +32,16 @@
             case 'reportes':
                 include 'reportes.php';
                 break;
-            case 'Control de mesas':
+            case 'control de mesas':
                 include 'control_mesas.php';
                 break;
+            case 'factura';
+                include 'factura.php';
+                break;
+            case 'cocina':
+                include 'cocina.php';
+                break;
             default:
-                echo "<h2>Bienvenido al Sistema de Gestión de Restaurante</h2>";
-                echo "<p>Por favor, selecciona una opción del menú.</p>";
                 break;
         }
         ?>

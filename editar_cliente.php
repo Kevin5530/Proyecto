@@ -17,7 +17,8 @@ if (isset($_GET['id'])) {
 if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['actualizar_cliente'])) {
     $nombre_cliente = $_POST['nombre_cliente'];
     $telefono = $_POST['telefono'];
-    $crud->actualizarCliente($conexion, $id_cliente, $nombre_cliente, $telefono);
+    $num_personas = $_POST['num_personas'];
+    $crud->actualizarCliente($conexion, $id_cliente, $nombre_cliente, $telefono, $num_personas);
 
     // Redirige a la página de clientes después de actualizar
     header("Location: clientes.php");
@@ -46,6 +47,9 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['actualizar_cliente'])
 
             <label for="telefono">Teléfono:</label>
             <input type="text" id="telefono" name="telefono" value="<?php echo $cliente['telefono']; ?>">
+
+            <label for="num_personas">Num Personas:</label>
+            <input type="text" id="num_personas" name="num_personas" placeholder="Ej. 2">
 
             <button type="submit" name="actualizar_cliente">Actualizar Cliente</button>
         </form>
