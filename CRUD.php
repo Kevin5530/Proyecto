@@ -36,6 +36,8 @@ class CRUD
     // 4. Eliminar un cliente
     public function eliminarCliente($conn, $id_cliente)
     {
+
+
         $stmt = $conn->prepare("DELETE FROM clientes WHERE id_cliente = ?");
         $stmt->bind_param("i", $id_cliente);
         return $stmt->execute();
@@ -98,14 +100,21 @@ class CRUD
         $stmt->bind_param("i", $id_mesa);
         $stmt->execute();
 
-        $stmt = $conn->prepare("INSERT INTO pedidos (id_cliente, id_mesa, fecha_hora) VALUES (?, ?, NOW())");
+        $stmt = $conn->prepare("INSERT INTO pedido (id_cliente, id_mesa, fecha_hora) VALUES (?, ?, NOW())");
         $stmt->bind_param("ii", $id_cliente, $id_mesa);
         $stmt->execute();
+
 
         $conn->commit();
         return true;
     }
 
+    public function liberarMesasPorCliente($conn, $id_cliente)
+    {
+        $stmt = $conn->prepare("UPDATE control_mesas SET estado = 'disponible' WHERE id_mesa = ?");
+        $stmt->bind_param("i", $id_cliente);
+        return $stmt->execute();
+    }
 
     // 5. Agregar un nuevo producto
     public function agregarProducto($conn, $nombre_producto, $precio)
@@ -161,7 +170,7 @@ class CRUD
     // 10. Ver todos los pedidos
     public function obtenerPedidos($conn)
     {
-        $sql = "SELECT * FROM pedidos";
+        $sql = "SELECT * FROM pedido";
         return $conn->query($sql);
     }
 
