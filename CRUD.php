@@ -192,10 +192,10 @@ class CRUD
     }
 
     // 13. Eliminar un pedido
-    public function eliminarPedido($conn, $pedido_id)
+    public function eliminarPedido($conn, $id_pedido)
     {
-        $stmt = $conn->prepare("DELETE FROM pedidos WHERE pedido_id = ?");
-        $stmt->bind_param("i", $pedido_id);
+        $stmt = $conn->prepare("DELETE FROM pedido WHERE id_pedido = ?");
+        $stmt->bind_param("i", $id_pedido);
         return $stmt->execute();
     }
 

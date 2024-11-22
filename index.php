@@ -26,8 +26,8 @@
             case 'productos':
                 include 'productos.php';
                 break;
-            case 'pedidos':
-                include 'pedidos.php';
+            case 'pedido':
+                include 'pedido.php';
                 break;
             case 'reportes':
                 include 'reportes.php';
