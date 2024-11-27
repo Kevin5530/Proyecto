@@ -20,18 +20,6 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST' && isset($_POST['agregar_cliente'])) {
     }
 }
 
-// Procesar eliminación de cliente
-if (isset($_GET['eliminar'])) {
-    $id_cliente = $_GET['eliminar'];
-
-    // Llamar a la función eliminarCliente en la clase CRUD
-    if ($crud->eliminarCliente($conexion, $id_cliente)) {
-        header("Location: clientes.php");
-        exit();
-    } else {
-        echo "<p style='color: red; text-align: center;'>Error al eliminar el cliente.</p>";
-    }
-}
 
 //Buscar Mesa disponible
 if (isset($_SESSION['id_cliente']) && isset($_SESSION['num_personas']) && is_numeric($_SESSION['num_personas'])) {
@@ -111,7 +99,6 @@ $clientes = $crud->obtenerClientes($conexion);
                         <td><?php echo $cliente['num_personas']; ?></td>
                         <td>
                             <a href="editar_cliente.php?id=<?php echo $cliente['id_cliente']; ?>" class="btn-edit">Editar</a>
-                            <a href="clientes.php?eliminar=<?php echo $cliente['id_cliente']; ?>" class="btn-delete">Eliminar</a>
                         </td>
                     </tr>
                 <?php endwhile; ?>

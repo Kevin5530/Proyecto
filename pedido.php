@@ -1,13 +1,12 @@
 <?php
 include("conexion.php");
+include_once 'CRUD.php';
+
+
+$crud = new CRUD($conexion);
 
 // Obtener todos los pedidos
-$pedidos = $conexion->query("
-    SELECT p.id_pedido, c.nombre_cliente, p.fecha_pedido, p.total
-    FROM pedido p
-    JOIN clientes c ON p.id_cliente = c.id_cliente
-    ORDER BY p.fecha_pedido DESC
-");
+$pedidos = $crud->obtenerPedidos($conexion);
 
 ?>
 
@@ -18,6 +17,7 @@ $pedidos = $conexion->query("
     <meta charset="UTF-8">
     <title>Pedidos</title>
     <link rel="stylesheet" href="css/estilo.css">
+    <link rel="stylesheet" href="css/detalle_pedido.css?v=<?php echo time(); ?>">
 </head>
 
 <body>
@@ -27,7 +27,7 @@ $pedidos = $conexion->query("
     <a href="crear_pedido.php" class="btn">Crear Nuevo Pedido</a>
 
     <h3>Lista de Pedidos</h3>
-    <table>
+    <table id="tabla-productos">
         <thead>
             <tr>
                 <th>ID</th>
@@ -47,8 +47,7 @@ $pedidos = $conexion->query("
                     <td>
                         <a href="ver_detalle_pedido.php?id_pedido=<?php echo $pedido['id_pedido']; ?>" class="btn-edit">Ver detalles</a>
                         <a href="eliminar_pedido.php?id_pedido=<?php echo $pedido['id_pedido']; ?>" class="btn-delete">Eliminar Pedido</a>
-
-
+                        <a href="factura.php?id_pedido=<?php echo $pedido['id_pedido']; ?>" class="btn-pagar">Pagar Pedido</a>
                     </td>
                 </tr>
             <?php endwhile; ?>

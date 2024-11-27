@@ -20,8 +20,8 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     // Insertar productos al detalle del pedido
     $total = 0;
     foreach ($productos_seleccionados as $index => $id_producto) {
-        $cantidad = $cantidades[$index];
-        $precio = $conexion->query("SELECT precio FROM productos WHERE id_producto = $id_producto")->fetch_assoc()['precio'];
+        $cantidad = (float)$cantidades[$index];
+        $precio = (float)$conexion->query("SELECT precio FROM productos WHERE id_producto = $id_producto")->fetch_assoc()['precio'];
         $subtotal = $cantidad * $precio;
         $total += $subtotal;
 
@@ -33,6 +33,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     $conexion->query("UPDATE pedido SET total = $total WHERE id_pedido = $id_pedido");
 
     header("Location: pedido.php");
+    exit();
 }
 ?>
 
@@ -43,13 +44,14 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     <meta charset="UTF-8">
     <title>Crear Pedido</title>
     <link rel="stylesheet" href="css/estilo.css">
+    <link rel="stylesheet" href="css/productos.css?v=<?php echo time(); ?>">
 </head>
 
 <body>
     <?php include_once 'encabezado.php'; ?>
 
     <h2>Crear Pedido</h2>
-    <form method="POST">
+    <form method="POST" class="form-producto">
         <label for="id_cliente">Cliente:</label>
         <select id="id_cliente" name="id_cliente" required>
             <?php while ($cliente = $clientes->fetch_assoc()): ?>
@@ -62,10 +64,10 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             <?php while ($producto = $productos->fetch_assoc()): ?>
                 <div>
                     <label>
-                        <input type="checkbox" name="productos[]" value="<?php echo $producto['id_producto']; ?>">
+                        <input type="checkbox" name="productos[<?php echo $producto['id_producto']; ?>]" value="<?php echo $producto['id_producto']; ?>">
                         <?php echo $producto['nombre_producto']; ?> ($<?php echo $producto['precio']; ?>)
                     </label>
-                    <input type="number" name="cantidades[]" placeholder="Cantidad" min="1">
+                    <input type="number" name="cantidades[<?php echo $producto['id_producto']; ?>]" placeholder="Cantidad" min="1">
                 </div>
             <?php endwhile; ?>
         </div>

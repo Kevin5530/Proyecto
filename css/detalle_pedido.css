@@ -1,0 +1,101 @@
+/* Estilo base del cuerpo */
+body {
+    font-family: Arial, sans-serif;
+    background-color: #f9f9f9;
+    margin: 0;
+    padding: 0;
+  }
+  
+  /* Encabezados */
+  h2 {
+    text-align: center;
+    color: #333;
+    margin-bottom: 20px;
+  }
+  
+  /* Contenedor de los detalles del pedido */
+  .detalle-pedido {
+    width: 90%; /* Ocupa un 90% del contenedor */
+    max-width: 800px; /* Limita el ancho máximo */
+    margin: 20px auto; /* Centra el bloque */
+    background: #fff;
+    padding: 20px;
+    border-radius: 5px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1); /* Sombra */
+  }
+  
+  .detalle-pedido p {
+    margin: 10px 0; /* Espaciado entre párrafos */
+    font-size: 16px;
+    color: #333; /* Color de texto */
+  }
+  
+  .detalle-pedido p strong {
+    color: #007bff; /* Resalta los títulos */
+  }
+  
+  /* Estilo de la tabla */
+  #tabla-detalle {
+    width: 90%; /* Ocupa un 90% del contenedor */
+    max-width: 1200px; /* Limita el ancho máximo */
+    margin: 20px auto; /* Centrar la tabla */
+    border-collapse: collapse;
+    background: #fff;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1); /* Sombra para realzar */
+    table-layout: auto; /* Ajusta las columnas automáticamente */
+  }
+  
+  #tabla-detalle th,
+  #tabla-detalle td {
+    padding: 10px;
+    text-align: center; /* Centra el texto */
+    border: 1px solid #ddd; /* Bordes claros */
+    word-wrap: break-word; /* Ajusta texto largo */
+  }
+  
+  #tabla-detalle th {
+    background-color: #f2f2f2; /* Fondo para encabezados */
+    text-transform: uppercase; /* Texto en mayúsculas */
+  }
+  
+  #tabla-detalle tr:nth-child(even) {
+    background-color: #f9f9f9; /* Color alternado para filas */
+  }
+  
+  #tabla-detalle tr:hover {
+    background-color: #f1f1f1; /* Color al pasar el mouse */
+  }
+  
+  /* Botón de enviar a cocina */
+  form button {
+    width: 100%; /* Ajuste automático del ancho */
+    padding: 10px 20px; /* Espaciado interno */
+    background-color: #007bff; /* Color azul */
+    color: white; /* Texto blanco */
+    border: none;
+    border-radius: 5px; /* Bordes redondeados */
+    cursor: pointer; /* Cambia el cursor al pasar el mouse */
+    transition: background-color 0.3s ease; /* Efecto de transición */
+  }
+  
+  form button:hover {
+    background-color: #0056b3; /* Azul más oscuro al pasar el mouse */
+  }
+  
+  /* Responsividad para pantallas pequeñas */
+  @media (max-width: 768px) {
+    #tabla-detalle {
+      font-size: 14px; /* Reduce el tamaño del texto */
+      width: 100%; /* Asegura que la tabla ocupe el ancho disponible */
+    }
+  
+    .detalle-pedido {
+      padding: 15px;
+      width: 95%;
+    }
+  
+    form button {
+      width: 100%; /* Botón ocupa todo el ancho */
+    }
+  }
+  

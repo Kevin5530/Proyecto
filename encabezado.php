@@ -9,6 +9,7 @@
             <li><a href="index.php?seccion=cocina">Cocina</a></li>
             <li><a href="index.php?seccion=factura">Factura</a></li>
             <li><a href="index.php?seccion=reportes">Reportes</a></li>
+            <li><a href="index.php?seccion=empleados">Empleados</a></li>
 
         </ul>
     </nav>

@@ -31,7 +31,7 @@ if (!$productos) {
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Gestión de Productos</title>
-    <link rel="stylesheet" href="css/estilo.css?v=<?php echo time(); ?>"> <!-- Forzar recarga del CSS -->
+    <link rel="stylesheet" href="css/estilo.css?v=<?php echo time(); ?>">
     <link rel="stylesheet" href="css/productos.css?v=<?php echo time(); ?>">
 </head>
 

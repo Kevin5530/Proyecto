@@ -17,13 +17,16 @@ if (isset($_GET['id'])) {
 if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['actualizar_mesa'])) {
     $numero_mesa = isset($_POST['numero_mesa']) ? (int) $_POST['numero_mesa'] : null;
     $capacidad = isset($_POST['capacidad']) ? (int) $_POST['capacidad'] : null;
+    $id_empleado = isset($_POST['id_empleado']) ? (int) $_POST['id_empleado'] : null;
 
-    $crud->actualizarMesa($conexion, $id_mesa, $numero_mesa, $capacidad);
+    $crud->actualizarMesa($conexion, $id_mesa, $numero_mesa, $capacidad, $id_empleado);
 
     // Redirige a la página de productos después de actualizar
     header("Location: control_mesas.php");
     exit();
 }
+
+$empleados = $crud->consultarEmpleados($conexion);
 ?>
 
 <!DOCTYPE html>
@@ -32,7 +35,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['actualizar_mesa'])) {
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Editar Producto</title>
+    <title>Editar Mesa</title>
     <link rel="stylesheet" href="css/estilo.css?v=<?php echo time(); ?>">
 </head>
 
@@ -47,6 +50,15 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['actualizar_mesa'])) {
 
             <label for="capacidad">Capacidad:</label>
             <input type="number" id="capacidad" name="capacidad" value="<?php echo $mesa['numero_mesa']; ?>" required>
+
+            <label for="id_empleado">Mesero:</label>
+            <select id="id_empleado" name="id_empleado" required>
+                <?php foreach ($empleados as $empleado): ?>
+                    <option value="<?php echo $empleado['id_empleado']; ?>">
+                        <?php echo $empleado['nombre_empleado']; ?>
+                    </option>
+                <?php endforeach; ?>
+            </select>
 
             <button type="submit" name="actualizar_mesa">Actualizar Mesa</button>
         </form>

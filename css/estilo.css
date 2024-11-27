@@ -62,13 +62,22 @@ table {
 }
 
 th, td {
-    padding: 10px;
-    text-align: center;
-    border: 1px solid #ddd;
+    min-width: 100px; /* Ancho mínimo para las celdas */
+    max-width: 300px; /* Ancho máximo para las celdas */
+    overflow: hidden; /* Oculta contenido desbordado */
+    text-overflow: ellipsis; /* Muestra "..." si el contenido excede */
+    word-wrap: break-word;
 }
 
 th {
     background-color: #f2f2f2;
+}
+
+td.email {
+    max-width: 200px; /* Ajusta específicamente el ancho de la columna de correos */
+    word-wrap: break-word;
+    white-space: normal;
+    overflow: hidden; /* Oculta texto si excede el tamaño máximo */
 }
 
 table tr:hover {
@@ -87,9 +96,9 @@ table a:hover {
 /* Contenedor de la tabla */
 .table-container {
     width: 100%;               /* Ancho completo del contenedor */
-    max-width: 1200px;         /* Limitar el tamaño máximo */
+    max-width: 1400px;         /* Limitar el tamaño máximo */
     margin: 20px auto;         /* Centrarlo en la pantalla */
-    padding: 10px;             /* Espaciado interno */
+    padding: 15px;             /* Espaciado interno */
     border: 1px solid #ddd;    /* Borde de la tabla */
     max-height: 500px;         /* Limitar la altura máxima */
     overflow-y: auto;          /* Permite desplazamiento vertical si es necesario */
@@ -190,4 +199,22 @@ button:hover {
         font-size: 1em;
     }
 }
+
+.cocina-ready {
+    background-color: #4CAF50;
+    color: white;
+}
+
+.cocina-pending {
+    background-color: #f39c12;
+    color: white;
+}
+
+.estado-listo {
+    background-color: #d4edda; /* Verde claro */
+}
+.estado-preparacion {
+    background-color: #fff3cd; /* Amarillo claro */
+}
+
 

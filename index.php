@@ -41,6 +41,9 @@
             case 'cocina':
                 include 'cocina.php';
                 break;
+            case 'empleados':
+                include 'empleados.php';
+                break;
             default:
                 break;
         }
